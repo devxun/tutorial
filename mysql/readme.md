@@ -8,7 +8,7 @@
 
 ### 下载
 
-![phpstudy 下载](pic/phpstudy 下载.png)
+![phpstudy 下载](./pic/phpstudy-download.png)
 
 
 
