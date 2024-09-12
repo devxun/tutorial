@@ -18,23 +18,23 @@
 >
 > 2. 保证安装路径是纯净的，安装路径下不能有已安装的版本；
 
-![phpstudy 安装](./pic/phpstudy 安装.png)
+![phpstudy 安装](./pic/phpstudy-install.png)
 
 ### 使用
 
-![phpstudy 首页](./pic/phpstudy 首页.png)
+![phpstudy 首页](./pic/phpstudy-start.png)
 
 默认已存在 MySQL5.7.26 版本，如果需要其他版本，可以在 **软件管理** 界面进行下载安装，如下载安装 MySQL8.0.12。
 
-![phpstudy 软件管理界面](./pic/phpstudy 软件管理界面.png)
+![phpstudy 软件管理界面](./pic/phpstudy-software.png)
 
 如此即可在 **数据库** 界面管理 MySQL，但一般情况下不需要操作，保持默认即可。
 
-![phpstudy 数据库界面](./pic/phpstudy 数据库界面.png)
+![phpstudy 数据库界面](./pic/phpstudy-database.png)
 
 在 **首页** 即可启动 MySQL。
 
-![phpstudy 启动 MySQL](./pic/phpstudy 启动 MySQL.png)
+![phpstudy 启动 MySQL](./pic/phpstudy-start-mysql.png)
 
 ## 数据库工具选择
 
@@ -46,14 +46,14 @@
 
 常规安装，不过需要创建一个 Navicat ID。
 
-![navicat 主界面](./pic/navicat 主界面.png)
+![navicat 主界面](./pic/navicat-main.png)
 
-![navicat 新建连接](./pic/navicat 新建连接.png)
+![navicat 新建连接](./pic/navicat-new-connection.png)
 
-![navicat 新建连接（MySQL）](./pic/navicat 新建连接（MySQL）.png)
+![navicat 新建连接（MySQL）](./pic/navicat-new-connection-mysql.png)
 
-![navicat 打开连接](./pic/navicat 打开连接.png)
+![navicat 打开连接](./pic/navicat-open-connection.png)
 
-![navicat 连接中](./pic/navicat 连接中.png)
+![navicat 连接中](./pic/navicat-connection.png)
 
 如此即可操作 MySQL 数据库，无论是可视化编程，还是代码编程，都可以。
