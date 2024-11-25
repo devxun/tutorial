@@ -113,14 +113,113 @@ try:
     with db_conn.cursor() as cursor:
         # 执行 SQL 语句
         cursor.execute(sql)
-        # 提交事务到数据库执行
-        db_conn.commit()
+    # 提交事务到数据库执行
+    db_conn.commit()
 except pymysql.MySQLError as err:
     # 如果发生错误则回滚事务
     db_conn.rollback()
 
 # 关闭数据库连接
 db_conn.close()
+
+```
+
+> 还有一个知识点是插入多条记录，建议使用游标对象的 `executemany` 方法做批处理，后面再加。
+
+### 更新数据
+
+```python
+import pymysql
+
+# 打开数据库连接
+with pymysql.connect(host='localhost', port=3306, user='root', password='root', db='test_db') as db_conn:
+    # SQL 更新语句
+    sql = "UPDATE EMPLOYEE SET AGE = AGE + 1 WHERE FIRST_NAME = %s" % 'Mac'
+    try:
+        # 使用 cursor() 方法创建一个游标对象 cursor
+        # 通过游标对象向数据库服务器发出 SQL 语句
+        with db_conn.cursor() as cursor:
+            # 执行 SQL 语句
+            cursor.execute(sql)
+        # 提交事务到数据库执行
+        db_conn.commit()
+    except pymysql.MySQLError as err:
+        # 如果发生错误则回滚事务
+        db_conn.rollback()
+
+```
+
+### 删除数据
+
+```py
+import pymysql
+
+# 打开数据库连接
+with pymysql.connect(host='localhost', port=3306, user='root', password='root', db='test_db') as db_conn:
+    try:
+        # 使用 cursor() 方法创建一个游标对象 cursor
+        # 通过游标对象向数据库服务器发出 SQL 语句
+        with db_conn.cursor() as cursor:
+            # 执行 SQL 语句
+            affected_row = cursor.execute(
+                "DELETE FROM EMPLOYEE WHERE FIRST_NAME = %s",
+                'Mac'
+            )
+            if affected_row == 1:
+                print('删除成功')
+        # 提交事务到数据库执行
+        db_conn.commit()
+    except pymysql.MySQLError as err:
+        # 如果发生错误则回滚事务
+        db_conn.rollback()
+
+```
+
+### 查询数据
+
+#### 查询单条记录
+
+```python
+import pymysql
+
+# 打开数据库连接
+with pymysql.connect(host='localhost', port=3306, user='root', password='root', db='test_db') as db_conn:
+    try:
+        # 使用 cursor() 方法创建一个游标对象 cursor
+        # 通过游标对象向数据库服务器发出 SQL 语句
+        with db_conn.cursor() as cursor:
+            # 执行 SQL 语句
+            cursor.execute("SELECT * FROM EMPLOYEE")
+            row = cursor.fetchone()
+            # print(row)  # 单次输出单条
+            while row:  # 循环输出多条
+                print(row)
+                row = cursor.fetchone()
+    except pymysql.MySQLError as err:
+        # print(type(err), err)
+        print("Error: unable to fetch data")
+
+```
+
+#### 查询多条记录
+
+```py
+import pymysql
+
+# 打开数据库连接
+with pymysql.connect(host='localhost', port=3306, user='root', password='root', db='test_db') as db_conn:
+    try:
+        # 使用 cursor() 方法创建一个游标对象 cursor
+        # 通过游标对象向数据库服务器发出 SQL 语句
+        with db_conn.cursor() as cursor:
+            # 执行 SQL 语句
+            cursor.execute("SELECT * FROM EMPLOYEE")
+            rows = cursor.fetchall()
+            for row in rows:
+                print(row)
+    except pymysql.MySQLError as err:
+        # print(type(err), err)
+        print("Error: unable to fetch data")
 
 ```
 
