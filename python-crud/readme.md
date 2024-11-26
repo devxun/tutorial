@@ -6,7 +6,9 @@
 >
 > 首先安装 pymysql 库，使用命令 `conda install pymysql` 或 `pip install pymysql` 都可以。
 
-## Python 直连 MySQL
+## PyMySQL
+
+### 创建与服务连接
 
 ```python
 import pymysql
@@ -22,7 +24,7 @@ db_conn.close()
 
 ```
 
-### 查看 MySQL 版本号
+#### 查看 MySQL 版本号
 
 ```python
 import pymysql
@@ -49,7 +51,7 @@ db_conn.close()
 
 ```
 
-## 创建数据表
+### 创建数据表
 
 ```python
 import pymysql
@@ -89,13 +91,15 @@ db_conn.close()
 >
 > ![pycharm-warning-3](./pic/pycharm-warning-3.png)
 
-## CRUD
+### CRUD
 
+> CRUD（创建：Create、读取：Read、更新：Update、删除：Delete）。
+>
 > 如果执行 `insert`、`delete` 或 `update` 操作，需要根据实际情况提交或回滚事务。因为创建连接时，默认开启了事务环境，在操作完成后，需要使用连接对象的 `commit` 或 `rollback` 方法，实现事务的提交或回滚，`rollback` 方法通常会放在异常捕获代码块 `except` 中。
 
-### 插入数据
+#### 插入数据
 
-#### 插入单条记录
+##### 插入单条记录
 
 ```python
 import pymysql
@@ -124,9 +128,32 @@ db_conn.close()
 
 ```
 
-> 还有一个知识点是插入多条记录，建议使用游标对象的 `executemany` 方法做批处理，后面再加。
+##### 插入多条记录
 
-### 更新数据
+```python
+import pymysql
+
+with pymysql.connect(host='localhost', user='root', passwd='root', db='test_db') as db_conn:
+    # SQL 语句的参数以元组形式组织
+    data = [
+        ('Jackie', 'Chan', 50, 'M', 5000),
+        ('Jet', 'Li', 40, 'M', 4000),
+        ('Jay', 'Chou', 35, 'F', 3000),
+    ]
+
+    sql = """INSERT INTO EMPLOYEE(FIRST_NAME, LAST_NAME, AGE, SEX, INCOME) VALUES (%s, %s, %s, %s, %s)"""
+
+    try:
+        with db_conn.cursor() as cursor:
+            # 将以列表形式组织的多条记录传递给 SQL 语句批量执行
+            cursor.executemany(sql, data)
+        db_conn.commit()
+    except pymysql.MySQLError as err:
+        db_conn.rollback()
+
+```
+
+#### 更新数据
 
 ```python
 import pymysql
@@ -149,7 +176,7 @@ with pymysql.connect(host='localhost', port=3306, user='root', password='root', 
 
 ```
 
-### 删除数据
+#### 删除数据
 
 ```py
 import pymysql
@@ -175,9 +202,9 @@ with pymysql.connect(host='localhost', port=3306, user='root', password='root', 
 
 ```
 
-### 查询数据
+#### 查询数据
 
-#### 查询单条记录
+##### 查询单条记录
 
 ```python
 import pymysql
@@ -201,7 +228,7 @@ with pymysql.connect(host='localhost', port=3306, user='root', password='root', 
 
 ```
 
-#### 查询多条记录
+##### 查询多条记录
 
 ```py
 import pymysql
@@ -223,3 +250,4 @@ with pymysql.connect(host='localhost', port=3306, user='root', password='root', 
 
 ```
 
+## SQLAlchemy
