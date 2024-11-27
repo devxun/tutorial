@@ -250,4 +250,49 @@ with pymysql.connect(host='localhost', port=3306, user='root', password='root', 
 
 ```
 
+### 总结（固定模板）
+
+```python
+# 1. 导入库
+import pymysql
+
+# 2. 创建与服务的连接
+with pymysql.connect(host='localhost', port=3306, user='root', password='root', db='test_db') as db_conn:
+    # 3. 创建游标对象
+    with db_conn.cursor() as cursor:
+        # 4. 定义 SQL 语句
+        # 插入、查询、修改、删除
+        sql = ''
+        # 5. 使用 try...except 执行 SQL 语句并捕获异常
+        try:
+            # 6. 插入单条数据、查询数据、修改数据、删除数据，均使用 execute
+            # 插入多条数据使用 executemany
+            cursor.execute(sql)
+            
+            # 8.1. 如果是插入数据、修改数据、删除数据，会有受影响的行数，可以以此给用户提示
+            # affected_row = cursor.execute(sql)
+            # if affected_row > 0:
+            #     print('提示信息')
+            
+            # 7.1. 单条打印 fetchone
+            # row = cursor.fetchone()
+            # # 通过 while 循环实现了一个批量打印的效果
+            # while row:
+            #     print(row)
+            #     row = cursor.fetchone()
+            # 7.2. 批量打印 fetchall
+            rows = cursor.fetchall()
+            # print(rows)
+            for row in rows:
+                print(row)
+                
+            # 8.2. 如果是插入数据、修改数据、删除数据，需要提交事务
+            # db_conn.commit()
+        except pymysql.MySQLError as err:
+            print(err)
+            # 发生异常后需要回滚事务
+            # db_conn.rollback()
+
+```
+
 ## SQLAlchemy

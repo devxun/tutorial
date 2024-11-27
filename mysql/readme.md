@@ -4,7 +4,7 @@
 
 > 没有必要去 [MySQL 中文官网](https://www.mysql.com/cn/)下载安装程序然后再进行安装，如果感兴趣，可以自行去[下载中心](https://dev.mysql.com/downloads/mysql/)查看。
 
-本着快速搭建服务器（本机也可以视作服务器）环境的宗旨，我们可以采用更简单的方式，如使用[小皮面板](https://www.xp.cn/php-study)，正如其 slogan，**让天下没有难配的服务器环境**，我们可以通过 phpStudy 快速下载并安装 MySQL 数据库，当然还有其他服务器环境中所需要的软件，如 Apache、Nginx、FTP、php、redis 等。
+本着快速搭建服务器（本机也可以视作服务器）环境的宗旨，我们可以采用更简单的方式，如使用[小皮面板](https://www.xp.cn/php-study)，正如其 slogan，**让天下没有难配的服务器环境**，我们可以通过 **phpStudy** 快速下载并安装 MySQL 数据库，当然还有其他服务器环境中所需要的软件，如 Apache、Nginx、FTP、php、redis 等。
 
 ### 下载
 
@@ -73,7 +73,7 @@ show databases;
 #### 切换到指定数据库
 
 ```mysql
-use <database-name>
+use <database-name>;
 ```
 
 #### 查看所有数据表
